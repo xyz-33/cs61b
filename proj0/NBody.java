@@ -12,9 +12,9 @@ public class NBody{
 		double radius = in.readDouble();
 
 		Planet[] planetArray;//声明
-		planetArray = new Planet[5];//创建		
+		planetArray = new Planet[planet_number];//创建		
 		int i;
-		for(i=0; i<5; i++) {
+		for(i=0; i<planet_number; i++) {
 			double xxpos = in.readDouble();
 			double yypos = in.readDouble();
 			double xxvel = in.readDouble();
@@ -49,19 +49,20 @@ public class NBody{
         int i;
         StdDraw.enableDoubleBuffering();
         double time = 0;
+        int planet_number = planets.length;
         int waitTimeMilliseconds = 10;
-        double[] xForces = new double[5];
-        double[] yForces = new double[5];
+        double[] xForces = new double[planet_number];
+        double[] yForces = new double[planet_number];
         while(time != T){
-        	for(i=0; i<planets.length; i++){
+        	for(i=0; i<planet_number; i++){
         		xForces[i] = planets[i].calcNetForceExertedByX(planets);
         		yForces[i] = planets[i].calcNetForceExertedByY(planets);
         	}
-        	for(i=0; i<planets.length; i++){
+        	for(i=0; i<planet_number; i++){
         		planets[i].update(dt, xForces[i], yForces[i]);
         	}
         	StdDraw.picture(0, 0, background_image);
-        	for(i=0; i<planets.length; i++){
+        	for(i=0; i<planet_number; i++){
         		planets[i].draw();
         	}
         	StdDraw.show();
@@ -70,7 +71,7 @@ public class NBody{
         }
 		StdOut.printf("%d\n", planets.length);
 		StdOut.printf("%.2e\n", radius);
-		for (i = 0; i < planets.length; i++) {
+		for (i = 0; i < planet_number; i++) {
     		StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
                   		planets[i].xxPos, planets[i].yyPos, planets[i].xxVel,
                  		planets[i].yyVel, planets[i].mass, planets[i].imgFileName);   
