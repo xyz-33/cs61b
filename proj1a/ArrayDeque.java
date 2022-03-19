@@ -37,25 +37,21 @@ public class ArrayDeque<T>{
 	}
 
 	public void addLast(T item){
-		if(isFull()){
+		if(isFull()) {
 			resize(items.length * 2);
 		}
-		else{
-			items[nextLast] = item;
-			size++;
-			nextLast = (nextLast + 1) % (items.length);
-		}
+		items[nextLast] = item;
+		size++;
+		nextLast = (nextLast + 1) % (items.length);
 	}
 
 	public void addFirst(T item){
 		if(isFull()){
 			resize(items.length * 2);
 		}
-		else{
-			items[nextFirst] = item;
-			size++;
-			nextFirst = (nextFirst - 1 + items.length) % items.length;
-		}		
+		items[nextFirst] = item;
+		size++;
+		nextFirst = (nextFirst - 1 + items.length) % items.length;
 	}
 
 	public T removeFirst(){
@@ -66,6 +62,9 @@ public class ArrayDeque<T>{
 		T returnItem = items[nextFirst];
 		items[nextFirst] = null;
 		size--;
+		while(size < items.length/4){
+			resize(items.length/2);
+		}
 		return returnItem;
 	}
 
@@ -77,10 +76,14 @@ public class ArrayDeque<T>{
 		T returnItem = items[nextLast];
 		items[nextLast] = null;
 		size--;
+		while(size < items.length/4){
+			resize(items.length/2);
+		}
 		return returnItem;
 	}
 
 	public void printDeque(){
+		System.out.println(items.length);
 		int current = (nextFirst + 1) % items.length;//队首元素所在位置
 		while(current != nextLast){
 			System.out.print(items[current] + " ");
