@@ -16,8 +16,7 @@ public class ArrayDeque<T>{
 	}
 
 	public boolean isEmpty(){
-		int arraySize = size();
-		if(arraySize == 0){
+		if(size == 0){
 			return true;
 		}
 		else{
@@ -26,8 +25,7 @@ public class ArrayDeque<T>{
 	}
 
 	private boolean isFull(){
-		int arraySize = size();
-		if(arraySize == items.length - 2){
+		if(size == items.length - 2){
 			//nextFirst和nextLast是队列两端的下一个位子,为了始终保证这两个指向的是空位
 			return true;
 		}
@@ -92,8 +90,7 @@ public class ArrayDeque<T>{
 	}
 
 	public T get(int index){
-		int arraySize = size();
-		if(isEmpty() || (index > arraySize-1)){
+		if(isEmpty() || (index > size-1)){
 			return null;
 		}
 		int current = (nextFirst + 1) % items.length;//队首元素所在位置

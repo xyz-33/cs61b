@@ -96,8 +96,7 @@ public class LinkedListDeque<T>{
 	}
 
 	public T get(int index){
-		int listSize = size();
-		if(isEmpty() || (index > listSize-1)){
+		if(isEmpty() || (index > size-1)){
 			return null;
 		}
 		Node current = sentinel.next;//从第一个节点开始
