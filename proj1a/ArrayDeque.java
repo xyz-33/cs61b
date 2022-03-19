@@ -25,7 +25,7 @@ public class ArrayDeque<T>{
 		}
 	}
 
-	public boolean isFull(){
+	private boolean isFull(){
 		int arraySize = size();
 		if(arraySize == items.length - 2){
 			//nextFirst和nextLast是队列两端的下一个位子,为了始终保证这两个指向的是空位
@@ -103,13 +103,16 @@ public class ArrayDeque<T>{
 
 	private void resize(int capacity){
 		T[] a = (T []) new Object[capacity];
-		int i;
 		int current = (nextFirst + 1) % items.length;//队首元素所在位置
-		for(i=0; i<size; i++){
+		//把原数组first到last一共size个元素，复制到新数组的0到size-1
+		for(int i=0; i<size; i++){
 			a[i] = items[current];
 			current = (current + 1) % items.length;
 		}
 		items = a;
+		//所以复制好之后，nextFirst是0前一格，即items.length - 1，nextLast是size-1后一格，即size
+		nextFirst = items.length - 1;
+		nextLast = size;
 	}
 
 }

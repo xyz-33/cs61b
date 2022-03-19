@@ -108,13 +108,19 @@ public class LinkedListDeque<T>{
 		return current.data;
 	}
 
-	public T getRecursive(int index){
+	public T getRecursiveHelper(Node firstNode, int index){
 		if(index == 0){
-			return sentinel.next.data;
+			return firstNode.data;
 		}
 		else{
-			sentinel = sentinel.next;
-			return getRecursive(index-1);
+			return getRecursiveHelper(firstNode.next, index-1);
 		}
+	}
+
+	public T getRecursive(int index){
+		if(index > size - 1){
+			return null;
+		}
+		return getRecursiveHelper(sentinel.next, index);
 	}
 }
