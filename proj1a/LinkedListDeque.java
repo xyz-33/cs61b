@@ -2,7 +2,7 @@ public class LinkedListDeque<T>{
 	private Node sentinel;
 	private int size;
 
-	public class Node{
+	private class Node{
 		public T data;
 		public Node previous;
 		public Node next;
@@ -59,14 +59,14 @@ public class LinkedListDeque<T>{
 
 	public void addLast(T item){
 		Node x = new Node(item);
-		//x的next指向最后一个节点
-		x.next = sentinel.previous;
-		//x的previous指向倒数第二个节点
-		x.previous = sentinel.previous.previous;
-		//倒数第二个节点的next指向x
-		sentinel.previous.previous.next = x;
-		//最后一个节点的previous指向x
-		sentinel.previous.previous = x;
+		//x的next指向sentinel
+		x.next = sentinel;
+		//x的previous指向之前的最后一个节点
+		x.previous = sentinel.previous;
+		//之前的最后一个节点的next指向x
+		sentinel.previous.next = x;
+		//sentinel的previous指向x
+		sentinel.previous = x;
 		size++;
 	}
 
